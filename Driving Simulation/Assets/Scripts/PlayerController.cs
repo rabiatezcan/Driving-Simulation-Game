@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     GameObject cam;
     Vector3 camOffset = new Vector3(0, 5, -8);
     float turnDirection;
+    float turnSpeed = 25f ;
+    float backAndFortDirection;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,8 +20,9 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         turnDirection = Input.GetAxis("Horizontal");
-        gameObject.transform.Translate(Vector3.forward * Time.deltaTime * carSpeed);
-        gameObject.transform.Translate(Vector3.right * Time.deltaTime * turnDirection);
+        backAndFortDirection = Input.GetAxis("Vertical");
+        gameObject.transform.Translate(Vector3.forward * Time.deltaTime * carSpeed * backAndFortDirection);
+        gameObject.transform.Rotate(Vector3.up, Time.deltaTime * turnSpeed * turnDirection);
     }
     private void LateUpdate()
     {
